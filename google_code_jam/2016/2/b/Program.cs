@@ -29,7 +29,7 @@ namespace a
                             ls[k - 1 - j] = p[n - 1 - j];
                         }
                         double ans = 0;
-                        for (int j = 0; j < (int)Math.Pow(2,k)+1; j++)
+                        for (int j = 0; j < (int)Math.Pow(2,k); j++)
                         {
                             if (bitCount(j) % 2 == 1) continue;
                             double tmp = 1;
