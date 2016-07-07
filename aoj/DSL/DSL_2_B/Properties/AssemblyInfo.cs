@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // アセンブリに関する一般情報は以下の属性セットをとおして制御されます。
 // アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更してください。
-[assembly: AssemblyTitle("1188")]
+[assembly: AssemblyTitle("DSL_2_B")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("1188")]
+[assembly: AssemblyProduct("DSL_2_B")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // このプロジェクトが COM に公開される場合、次の GUID が typelib の ID になります
-[assembly: Guid("31541b50-7f6f-4cfe-88c6-04031cd50511")]
+[assembly: Guid("d15f0b5a-a29b-4669-b843-bdea985e98c6")]
 
 // アセンブリのバージョン情報は次の 4 つの値で構成されています:
 //
