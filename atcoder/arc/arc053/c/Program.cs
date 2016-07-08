@@ -10,18 +10,18 @@ namespace c
     {
         static void Main(string[] args)
         {
-            int n = int.Parse(Console.ReadLine());
-            List<int> upa = new List<int>();
-            List<int> upb = new List<int>();
-            List<int> downa = new List<int>();
-            List<int> downb = new List<int>();
+            long n = long.Parse(Console.ReadLine());
+            List<long> upa = new List<long>();
+            List<long> upb = new List<long>();
+            List<long> downa = new List<long>();
+            List<long> downb = new List<long>();
 
-            for (int i = 0; i < n; i++)
+            for (long i = 0; i < n; i++)
             {
-                int[] ab = Console.ReadLine().Split().Select(int.Parse).ToArray();
-                int a = ab[0];
-                int b = ab[1];
-                if (a<b)
+                long[] ab = Console.ReadLine().Split().Select(long.Parse).ToArray();
+                long a = ab[0];
+                long b = ab[1];
+                if (a < b)
                 {
                     downa.Add(a);
                     downb.Add(b);
@@ -39,10 +39,11 @@ namespace c
             });
             var up = upa.Zip(upb, (x, y) => new { x, y }).ToArray();
             Array.Sort(up, (a, b) => {
-                return (a.x - a.y).CompareTo(b.x - b.y);
+                if (a.y != b.y) return -a.y.CompareTo(b.y);
+                return a.x.CompareTo(b.x);
             });
-            int t = 0;
-            int ans = 0;
+            long t = 0;
+            long ans = 0;
             foreach (var p in down)
             {
                 t += p.x;
