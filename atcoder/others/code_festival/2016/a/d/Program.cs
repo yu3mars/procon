@@ -30,11 +30,43 @@ namespace d
                     grid[i, j] = empty;
                 }
             }
+            Queue<long> qr = new Queue<long>();
+            Queue<long> qc = new Queue<long>();
+
             for (int i = 0; i < n; i++)
             {
                 int[] rca = Console.ReadLine().Split().Select(int.Parse).ToArray();
                 grid[rca[0], rca[1]] = rca[2];
+                qr.Enqueue(rca[0]);
+                qc.Enqueue(rca[1]);
             }
+            while (qr.Count > 0)
+            {
+                long nextr = qr.Dequeue();
+                long nextc = qc.Dequeue();
+                long tmpval = empty;
+
+                for (int i = 0; i < 4; i++)
+                {
+                    long tmp = judge(nextr - vr[i], nextc - vc[i]);
+                    if (tmp == empty) continue;
+                    else if (tmp < 0)
+                    {
+                        Console.WriteLine("No");
+                        return;
+                    }
+                    else
+                    {
+                        if (tmpval == empty) tmpval = tmp;
+                        else if (tmpval != tmp)
+                        {
+                            Console.WriteLine("No");
+                            return;
+                        }
+                    }
+                }
+            }
+            /*
             for (int rcnt = 1; rcnt <= r; rcnt++)
             {
                 for (int ccnt = 1; ccnt <= c; ccnt++)
@@ -62,11 +94,12 @@ namespace d
                             }
                         }
                     }
-                }
+                }                
             }
+            */
             Console.WriteLine("Yes");
         }
-        static long judge(int rtmp,int ctmp)
+        static long judge(long rtmp,long ctmp)
         {
             int empcnt = 0;
             long[] sqval = new long[4];
@@ -94,9 +127,16 @@ namespace d
                 {
                     return sqval[0] + sqval[3] - sqval[1];
                 }
-
-                return 0;
-            }            
+                return -2;
+            }
+            else if(empcnt==0)
+            {
+                if (sqval[0] + sqval[3] == sqval[1] + sqval[2])
+                {
+                    return empty;
+                }
+                else return -1;
+            }
             else return empty;
         }
     }
