@@ -19,10 +19,24 @@ class XYZCoder
         long ans = 1;
         long mod = 1000000007;
 
-        for (int rcnt = 0; rcnt < room; rcnt++)
+        long[,] dp = new long[room * size + 10, room + 10]; //member,winner
+        dp[0, 0] = 1;
+        for (int member = 1; member <= room*size; member++)
         {
-            ans = (ans * (rcnt * (size - 1) + 1)) % mod;
+            for (int winner = 0; winner <= room; winner++)
+            {
+                if(winner>0 && member >= winner*size)
+                {
+                    dp[member, winner] = (dp[member - 1, winner] + dp[member - 1, winner - 1]) % mod;
+
+                }
+                else
+                {
+                    dp[member, winner] = dp[member - 1, winner];
+                }
+            }
         }
+        ans = dp[room * size, room];
         for (int i = 1; i <= room; i++)
         {
             ans = (ans * i) % mod;
