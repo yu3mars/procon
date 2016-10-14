@@ -3,7 +3,31 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xylophone", "Xylophone\Xylophone.csproj", "{5226E2F7-23E6-4362-BB0A-096CB7B5B247}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XMarksTheSpot", "XMarksTheSpot\XMarksTheSpot.csproj", "{8F0EA53D-25AF-4F30-BE2A-F906D41673D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XYZCoder", "XYZCoder\XYZCoder.csproj", "{A1497A6D-1128-431A-B4BD-4519C5605723}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5226E2F7-23E6-4362-BB0A-096CB7B5B247}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5226E2F7-23E6-4362-BB0A-096CB7B5B247}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5226E2F7-23E6-4362-BB0A-096CB7B5B247}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5226E2F7-23E6-4362-BB0A-096CB7B5B247}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F0EA53D-25AF-4F30-BE2A-F906D41673D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F0EA53D-25AF-4F30-BE2A-F906D41673D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F0EA53D-25AF-4F30-BE2A-F906D41673D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F0EA53D-25AF-4F30-BE2A-F906D41673D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1497A6D-1128-431A-B4BD-4519C5605723}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1497A6D-1128-431A-B4BD-4519C5605723}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1497A6D-1128-431A-B4BD-4519C5605723}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1497A6D-1128-431A-B4BD-4519C5605723}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
