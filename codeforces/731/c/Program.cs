@@ -59,6 +59,16 @@ namespace Tmp
         /// </summary>
         void SolveOne()
         {
+            int n = sc.nextInt();
+            int m = sc.nextInt();
+            int k = sc.nextInt();
+            int[] c = sc.nextInt(n);
+            int[][] lr = new int[m][];
+            for (int i = 0; i < m; i++)
+            {
+                lr[i] = sc.nextInt(2);
+            }
+
 
         }
     }
