@@ -61,68 +61,159 @@ namespace Tmp
         {
             for(;;)
             {
-                int n = sc.nextInt();
-                if (n == 0) return;
-                HashMap<string, bool> alter = new HashMap<string, bool>();
-                HashMap<string, double> time = new HashMap<string, double>();
-                HashMap<string, DateTime> enterTime = new HashMap<string, DateTime>();
-
-                bool godHere = false;
-                DateTime date = new DateTime();
-                for (int i = 0; i < n; i++)
+                int p = sc.nextInt();
+                int q = sc.nextInt();
+                if (p == 0) return;
+                string[] sp = sc.next(p);
+                string[] sq = sc.next(q);
+                int[] pdot = new int[p];
+                int[][] pkakko = new int[p][];
+                int[] qdot = new int[q];
+                int[][] qkakko = new int[q][];
+                List<int[]> kakkols = new List<int[]>();
+                
+                for (int pcnt = 0; pcnt < p; pcnt++)
                 {
-                    DateTime dt = new DateTime(1, sc.nextInt(), sc.nextInt(), sc.nextInt(), sc.nextInt(), 0);
-
-                    string io = sc.next();
-                    string id = sc.next();
-                    if (io == "I")   //in
+                    pkakko[pcnt] = new int[3];
+                    if(pcnt > 0)
                     {
-                        alter[id] = true;
-                        enterTime[id] = dt;
-                    }
-                    else    //out
-                    {
-                        alter[id] = false;
-                        if(id =="000")  //if god out
+                        for (int i = 0; i < 3; i++)
                         {
-                            foreach (var al in alter)
+                            pkakko[pcnt][i] = pkakko[pcnt - 1][i];
+                        }
+                    }
+
+                    bool indent = true;
+                    for (int charcnt = 0; charcnt < sp[pcnt].Length; charcnt++)
+                    {
+                        switch (sp[pcnt][charcnt])
+                        {
+                            case '.':
+                                if (indent) pdot[pcnt]++;
+                                break;
+                            case '(':
+                                indent = false;
+                                pkakko[pcnt][0]++;
+                                break;
+                            case '{':
+                                indent = false;
+                                pkakko[pcnt][1]++;
+                                break;
+                            case '[':
+                                indent = false;
+                                pkakko[pcnt][2]++;
+                                break;
+                            case ')':
+                                indent = false;
+                                pkakko[pcnt][0]--;
+                                break;
+                            case '}':
+                                indent = false;
+                                pkakko[pcnt][1]--;
+                                break;
+                            case ']':
+                                indent = false;
+                                pkakko[pcnt][2]--;
+                                break;
+                            default:
+                                indent = false;
+                                break;
+                        }
+                    }                    
+                }
+
+                for (int qcnt = 0; qcnt < q; qcnt++)
+                {
+                    qkakko[qcnt] = new int[3];
+                    if (qcnt > 0)
+                    {
+                        for (int i = 0; i < 3; i++)
+                        {
+                            qkakko[qcnt][i] = qkakko[qcnt - 1][i];
+                        }
+                    }
+                    
+                    for (int charcnt = 0; charcnt < sq[qcnt].Length; charcnt++)
+                    {
+                        switch (sq[qcnt][charcnt])
+                        {
+                            case '(':
+                                qkakko[qcnt][0]++;
+                                break;
+                            case '{':
+                                qkakko[qcnt][1]++;
+                                break;
+                            case '[':
+                                qkakko[qcnt][2]++;
+                                break;
+                            case ')':
+                                qkakko[qcnt][0]--;
+                                break;
+                            case '}':
+                                qkakko[qcnt][1]--;
+                                break;
+                            case ']':
+                                qkakko[qcnt][2]--;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+
+                for (int a = 1; a <= 20; a++)
+                {
+                    for (int b = 1; b <= 20; b++)
+                    {
+                        for (int c = 1; c <= 20; c++)
+                        {
+                            bool ok = true;
+                            for (int pcnt = 0; pcnt < p - 1; pcnt++)
                             {
-                                if(al.Value == true)
+                                int indent = a * pkakko[pcnt][0] + b * pkakko[pcnt][1] + c * pkakko[pcnt][2];
+                                if(indent != pdot[pcnt + 1])
                                 {
-                                    time[al.Key] += Math.Min((dt - enterTime[al.Key]).TotalMinutes, (dt - enterTime["000"]).TotalMinutes);
+                                    ok = false;
+                                    break;
                                 }
                             }
-                        }
-                        else if(alter["000"])
-                        {
-                            time[id] += Math.Min((dt - enterTime[id]).TotalMinutes, (dt - enterTime["000"]).TotalMinutes);
+                            if(ok)
+                            {
+                                kakkols.Add(new int[3] { a, b, c });
+                            }
                         }
                     }
                 }
 
-                double ans = 0;
-                foreach (var t in time)
+
+                for (int lscnt = 0; lscnt < kakkols.Count; lscnt++)
                 {
-                    if(t.Key!="000")
+                    for (int qcnt = 0; qcnt < q - 1; qcnt++)
                     {
-                        ans = Math.Max(ans, t.Value);
+                        int indent = 0;
+                        for (int i = 0; i < 3; i++)
+                        {
+                            indent += kakkols[lscnt][i] * qkakko[qcnt][i];
+                        }
+                        if(qdot[qcnt + 1] == 0)
+                        {
+                            qdot[qcnt + 1] = indent;
+                        }
+                        else if(qdot[qcnt + 1] != indent)
+                        {
+                            qdot[qcnt + 1] = -1;
+                        }
                     }
                 }
-                Console.WriteLine((int)ans);
-            }
-        }
 
-        class HashMap<K, V> : Dictionary<K, V>
-        {
-            new public V this[K i]
-            {
-                get
+                //Console.WriteLine(string.Join(" ", qdot));
+                for (int i = 0; i < q; i++)
                 {
-                    V v;
-                    return TryGetValue(i, out v) ? v : base[i] = default(V);
+                    if (i > 0) Console.Write(" ");
+                    Console.Write(qdot[i]);
                 }
-                set { base[i] = value; }
-            }
+                Console.WriteLine();
+            } 
         }
     }
 }
@@ -190,7 +281,7 @@ namespace MyIO
         string[] nextBuffer = new string[0];
         int BufferCnt = 0;
 
-        char[] cs = new char[] { ' ', '/', ':' };
+        char[] cs = new char[] { ' ' };
 
         public string next()
         {

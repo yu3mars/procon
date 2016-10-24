@@ -59,70 +59,36 @@ namespace Tmp
         /// </summary>
         void SolveOne()
         {
-            for(;;)
+            int n = sc.nextInt();
+            int m = sc.nextInt();
+            int[] imos = new int[n + 1];
+            for (int i = 0; i < imos.Length; i++)
             {
-                int n = sc.nextInt();
-                if (n == 0) return;
-                HashMap<string, bool> alter = new HashMap<string, bool>();
-                HashMap<string, double> time = new HashMap<string, double>();
-                HashMap<string, DateTime> enterTime = new HashMap<string, DateTime>();
-
-                bool godHere = false;
-                DateTime date = new DateTime();
-                for (int i = 0; i < n; i++)
-                {
-                    DateTime dt = new DateTime(1, sc.nextInt(), sc.nextInt(), sc.nextInt(), sc.nextInt(), 0);
-
-                    string io = sc.next();
-                    string id = sc.next();
-                    if (io == "I")   //in
-                    {
-                        alter[id] = true;
-                        enterTime[id] = dt;
-                    }
-                    else    //out
-                    {
-                        alter[id] = false;
-                        if(id =="000")  //if god out
-                        {
-                            foreach (var al in alter)
-                            {
-                                if(al.Value == true)
-                                {
-                                    time[al.Key] += Math.Min((dt - enterTime[al.Key]).TotalMinutes, (dt - enterTime["000"]).TotalMinutes);
-                                }
-                            }
-                        }
-                        else if(alter["000"])
-                        {
-                            time[id] += Math.Min((dt - enterTime[id]).TotalMinutes, (dt - enterTime["000"]).TotalMinutes);
-                        }
-                    }
-                }
-
-                double ans = 0;
-                foreach (var t in time)
-                {
-                    if(t.Key!="000")
-                    {
-                        ans = Math.Max(ans, t.Value);
-                    }
-                }
-                Console.WriteLine((int)ans);
+                imos[i] = int.MaxValue;
             }
-        }
-
-        class HashMap<K, V> : Dictionary<K, V>
-        {
-            new public V this[K i]
+            for (int i = 0; i < m; i++)
             {
-                get
-                {
-                    V v;
-                    return TryGetValue(i, out v) ? v : base[i] = default(V);
-                }
-                set { base[i] = value; }
+                int c = sc.nextInt();
+                int d = sc.nextInt();
+                imos[d] = Math.Min(imos[d], c);
             }
+            for (int i = imos.Length - 1; i > 0; i--)
+            {
+                if(imos[i] < i)
+                {
+                    imos[i - 1] = Math.Min(imos[i - 1], imos[i]);
+                }
+            }
+            int start = int.MaxValue;
+            int ans = n + 1;
+            for (int i = 0; i < imos.Length; i++)
+            {
+                if(imos[i] < i)
+                {
+                    ans += 2;
+                }
+            }
+            Console.WriteLine(ans);
         }
     }
 }
@@ -190,7 +156,7 @@ namespace MyIO
         string[] nextBuffer = new string[0];
         int BufferCnt = 0;
 
-        char[] cs = new char[] { ' ', '/', ':' };
+        char[] cs = new char[] { ' ' };
 
         public string next()
         {

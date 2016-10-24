@@ -47,6 +47,9 @@ namespace Tmp
         // 使用する変数をここに書く
         // string S;
         // int a;
+        Dictionary<long, int> map;   //x,y,w
+        int[] vy = { 0, 0, 1, 1 };
+        int[] vx = { 0, 1, 0, 1 }; 
         /// <summary>
         /// 読み込み処理をここに書く
         /// </summary>
@@ -59,59 +62,40 @@ namespace Tmp
         /// </summary>
         void SolveOne()
         {
-            for(;;)
+            int n = sc.nextInt();
+            map = new Dictionary<long, int>();
+            for (int i = 0; i < n; i++)
             {
-                int n = sc.nextInt();
-                if (n == 0) return;
-                HashMap<string, bool> alter = new HashMap<string, bool>();
-                HashMap<string, double> time = new HashMap<string, double>();
-                HashMap<string, DateTime> enterTime = new HashMap<string, DateTime>();
-
-                bool godHere = false;
-                DateTime date = new DateTime();
-                for (int i = 0; i < n; i++)
+                long nowxy = sc.nextLong() * Mod + sc.nextLong();
+                map.Add(nowxy, sc.nextInt());
+            }
+            int ans = 0;
+            //xy nowxy;
+            foreach (var m in map)
+            {
+                for (int i = 0; i < 4; i++)
                 {
-                    DateTime dt = new DateTime(1, sc.nextInt(), sc.nextInt(), sc.nextInt(), sc.nextInt(), 0);
-
-                    string io = sc.next();
-                    string id = sc.next();
-                    if (io == "I")   //in
+                    long nowxy = m.Key - vx[i] * Mod - vy[i];
+                    int tmp = 0;
+                    for (int j = 0; j < 4; j++)
                     {
-                        alter[id] = true;
-                        enterTime[id] = dt;
+                        long next = nowxy + vx[j] * Mod + vy[j];
+                        if(map.ContainsKey(next)) tmp += map[next];
                     }
-                    else    //out
-                    {
-                        alter[id] = false;
-                        if(id =="000")  //if god out
-                        {
-                            foreach (var al in alter)
-                            {
-                                if(al.Value == true)
-                                {
-                                    time[al.Key] += Math.Min((dt - enterTime[al.Key]).TotalMinutes, (dt - enterTime["000"]).TotalMinutes);
-                                }
-                            }
-                        }
-                        else if(alter["000"])
-                        {
-                            time[id] += Math.Min((dt - enterTime[id]).TotalMinutes, (dt - enterTime["000"]).TotalMinutes);
-                        }
-                    }
+                    ans = Math.Max(ans, tmp);
                 }
-
-                double ans = 0;
-                foreach (var t in time)
-                {
-                    if(t.Key!="000")
-                    {
-                        ans = Math.Max(ans, t.Value);
-                    }
-                }
-                Console.WriteLine((int)ans);
+            }
+            Console.WriteLine("{0} / 1",ans);
+        }
+        struct xy
+        {
+            public int x, y;
+            public xy (int x,int y)
+            {
+                this.x = x;
+                this.y = y;
             }
         }
-
         class HashMap<K, V> : Dictionary<K, V>
         {
             new public V this[K i]
@@ -190,7 +174,7 @@ namespace MyIO
         string[] nextBuffer = new string[0];
         int BufferCnt = 0;
 
-        char[] cs = new char[] { ' ', '/', ':' };
+        char[] cs = new char[] { ' ' };
 
         public string next()
         {
