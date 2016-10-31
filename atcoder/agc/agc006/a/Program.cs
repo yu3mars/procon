@@ -65,7 +65,9 @@ namespace Tmp
             int ans = 2 * n;
             for (int i = 0; i < n; i++)
             {
+                if (s.Substring(i) == t.Substring(0, n - i))
                 {
+                    ans = Math.Min(ans, 2 * n - (n - i));
                 }
             }
             Console.WriteLine(ans);
