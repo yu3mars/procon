@@ -59,49 +59,16 @@ namespace Tmp
         /// </summary>
         void SolveOne()
         {
-            for (;;)
+            int n = sc.nextInt();
+            string s = sc.next();
+            string t = sc.next();
+            int ans = 2 * n;
+            for (int i = 0; i < n; i++)
             {
-                int tlen = sc.nextInt();
-                if (tlen == 0) return;
-                int[] t = sc.nextInt(tlen);
-                int n = sc.nextInt();
-                int[] m = new int[100];
-                for (int i = 0; i < m.Length; i++)
                 {
-                    m[i] = 100;
                 }
-                for (int i = 0; i < n; i++)
-                {
-                    int d = sc.nextInt() - 1;
-                    m[d] = Math.Min(m[d], sc.nextInt());
-                }
-                int[,] dp = new int[100, tlen];
-                for (int i = 0; i < 100; i++)
-                {
-                    for (int j = 0; j < tlen; j++)
-                    {
-                        dp[i, j] = int.MaxValue / 3;
-                    }
-                }
-                dp[0, 0] = 0;
-                for (int i = 0; i < 99; i++)
-                {
-                    for (int j = 0; j < tlen; j++)
-                    {
-                        dp[i + 1, 0] = Math.Min(dp[i + 1, 0], dp[i, j] + 1);
-                        if (t[(j + 1) % tlen] <= m[i + 1])
-                        {
-                            dp[i + 1, (j + 1) % tlen] = Math.Min(dp[i + 1, (j + 1) % tlen], dp[i, j]);
-                        }
-                    }
-                }
-                int ans = 1000;
-                for (int j = 0; j < tlen; j++)
-                {
-                    ans = Math.Min(ans, dp[99, j]);
-                }
-                Console.WriteLine(ans);
             }
+            Console.WriteLine(ans);
         }
     }
 }

@@ -59,48 +59,54 @@ namespace Tmp
         /// </summary>
         void SolveOne()
         {
-            for (;;)
+            int n = sc.nextInt();
+            int x = sc.nextInt();
+            if (x == 1 || x == 2 * n - 1)
             {
-                int tlen = sc.nextInt();
-                if (tlen == 0) return;
-                int[] t = sc.nextInt(tlen);
-                int n = sc.nextInt();
-                int[] m = new int[100];
-                for (int i = 0; i < m.Length; i++)
+                pr.WriteLine("No");
+                return;
+            }
+            pr.WriteLine("Yes");
+            if (n == 2)
+            {
+                for (int i = 1; i <= 2 * n - 1; i++)
                 {
-                    m[i] = 100;
+                    pr.WriteLine(i);
                 }
-                for (int i = 0; i < n; i++)
+            }
+            else
+            {
+                int a, b, c;
+                if (x == 2)
                 {
-                    int d = sc.nextInt() - 1;
-                    m[d] = Math.Min(m[d], sc.nextInt());
+                    a = x + 1;
+                    b = x - 1;
+                    c = x + 2;
                 }
-                int[,] dp = new int[100, tlen];
-                for (int i = 0; i < 100; i++)
+                else
                 {
-                    for (int j = 0; j < tlen; j++)
+                    a = x - 1;
+                    b = x + 1;
+                    c = x - 2;
+                }
+                int cnt = 1;
+                for (int i = 1; i <= 2 * n - 1; i++)
+                {
+                    if (cnt == n - 2)
                     {
-                        dp[i, j] = int.MaxValue / 3;
+                        pr.WriteLine(a);
+                        pr.WriteLine(x);
+                        pr.WriteLine(b);
+                        pr.WriteLine(c);
+                        cnt += 4;
                     }
-                }
-                dp[0, 0] = 0;
-                for (int i = 0; i < 99; i++)
-                {
-                    for (int j = 0; j < tlen; j++)
+                    if (i != c && i != x && i != a && i != b)
                     {
-                        dp[i + 1, 0] = Math.Min(dp[i + 1, 0], dp[i, j] + 1);
-                        if (t[(j + 1) % tlen] <= m[i + 1])
-                        {
-                            dp[i + 1, (j + 1) % tlen] = Math.Min(dp[i + 1, (j + 1) % tlen], dp[i, j]);
-                        }
+                        pr.WriteLine(i);
+                        cnt++;
                     }
+
                 }
-                int ans = 1000;
-                for (int j = 0; j < tlen; j++)
-                {
-                    ans = Math.Min(ans, dp[99, j]);
-                }
-                Console.WriteLine(ans);
             }
         }
     }
