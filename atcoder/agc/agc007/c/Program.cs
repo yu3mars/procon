@@ -47,6 +47,7 @@ namespace Tmp
         // 使用する変数をここに書く
         // string S;
         // int a;
+        int n;
         /// <summary>
         /// 読み込み処理をここに書く
         /// </summary>
@@ -59,7 +60,63 @@ namespace Tmp
         /// </summary>
         void SolveOne()
         {
+            int n = sc.nextInt();
+            int d1 = sc.nextInt();
+            int x = sc.nextInt();
+            double[] d = new double[n * 2];
+            d[0] = d1;
+            for (int i = 1; i < d.Length; i++)
+            {
+                d[i] = d[i - 1] + x;
+            }
+            double ans = dfs(d);
+            Console.WriteLine(ans);
+        }
 
+        double dfs(double[] d)
+        {
+            if (d.Length < 1) return 0;
+            double ret = 0;
+            double[] newd = new double[d.Length - 2];
+            double tmp = 0;
+
+            for (int i = 0; i < d.Length; i++)
+            {
+                tmp += d[i];
+                if (i == 0)
+                {
+                    for (int j = 0; j < newd.Length; j++)
+                    {
+                        newd[j] += d[j + 2];
+                    }
+                }
+                else if (i == d.Length - 1)
+                {
+                    for (int j = 0; j < newd.Length; j++)
+                    {
+                        newd[j] += d[j];
+                    }
+                }
+                else
+                {
+                    for (int j = 0; j < i; j++)
+                    {
+                        newd[j] += d[j];
+                    }
+                    newd[i - 1] += d[i] + d[i + 1];
+                    for (int j = i; j < newd.Length; j++)
+                    {
+                        newd[j] += d[j + 2];
+                    }
+                }
+            }
+            for (int i = 0; i < newd.Length; i++)
+            {
+                newd[i] /= d.Length;
+            }
+            ret += (tmp / d.Length + dfs(newd)) ;
+
+            return ret;
         }
     }
 }
