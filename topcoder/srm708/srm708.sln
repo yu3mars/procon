@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "easy", "easy\easy.csproj", "{E3527BED-4537-410B-81A2-5CC2A1ECA643}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mid", "mid\mid.csproj", "{9DEFF58F-4BF2-45BD-B52B-44C47904A93D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hard", "hard\hard.csproj", "{62720530-E144-45EC-91F6-3B9321E8D5BE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E3527BED-4537-410B-81A2-5CC2A1ECA643}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3527BED-4537-410B-81A2-5CC2A1ECA643}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3527BED-4537-410B-81A2-5CC2A1ECA643}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3527BED-4537-410B-81A2-5CC2A1ECA643}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DEFF58F-4BF2-45BD-B52B-44C47904A93D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DEFF58F-4BF2-45BD-B52B-44C47904A93D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DEFF58F-4BF2-45BD-B52B-44C47904A93D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DEFF58F-4BF2-45BD-B52B-44C47904A93D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62720530-E144-45EC-91F6-3B9321E8D5BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62720530-E144-45EC-91F6-3B9321E8D5BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62720530-E144-45EC-91F6-3B9321E8D5BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62720530-E144-45EC-91F6-3B9321E8D5BE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
