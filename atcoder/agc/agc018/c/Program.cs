@@ -47,6 +47,8 @@ namespace Tmp
         // 使用する変数をここに書く
         // string S;
         // int a;
+        int x, y, z;
+        long[] a, b, c;
         /// <summary>
         /// 読み込み処理をここに書く
         /// </summary>
@@ -59,6 +61,18 @@ namespace Tmp
         /// </summary>
         void SolveOne()
         {
+            x = sc.nextInt();
+            y = sc.nextInt();
+            z = sc.nextInt();
+            a = new long[x + y + z];
+            b = new long[x + y + z];
+            c = new long[x + y + z];
+            for (int i = 0; i < x+y+z; i++)
+            {
+                a[i] = sc.nextLong();
+                b[i] = sc.nextLong();
+                c[i] = sc.nextLong();
+            }
 
         }
     }
